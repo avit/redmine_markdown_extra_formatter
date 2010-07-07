@@ -99,8 +99,7 @@ module RedmineMarkdownExtraFormatter
 
     def to_html(&block)
       @macros_runner = block
-      parsedText = BlueFeather.parse(@text)
-      parsedText = inline_macros(parsedText)
+      parsedText = inline_macros(@text)
       parsedText = syntax_highlight(parsedText)
     rescue => e
       return("<pre>problem parsing wiki text: #{e.message}\n"+
@@ -114,37 +113,65 @@ module RedmineMarkdownExtraFormatter
           (
           \{\{                        # opening tag
           ([\w]+)                     # macro name
-          (\(([^\}]*)\))?             # optional arguments
+          (\((.*?)\))?                # optional arguments
           \}\}                        # closing tag
           )
-        /x
+        /xm
+
+    TICKET_RE = /(#\d+)(\W|$)/
+
+    CODE_RE = /
+          ^\s*<pre><code\s+class="([\w]+)">\s*\n
+          (.+?)
+          ^\s*<\/code><\/pre>\s*$
+        /xm
+
+    SUBST_PREFIX = 'redmine_markdown_extra_formatter_'
 
     def inline_macros(text)
+      macro_subst = {}
+      subst_key = 0
       text.gsub!(MACROS_RE) do
         esc, all, macro = $1, $2, $3.downcase
-        args = ($5 || '').split(',').each(&:strip)
-        if esc.nil?
-          begin
-            @macros_runner.call(macro, args)
-          rescue => e
-            "<div class=\"flash error\">Error executing the <strong>#{macro}</strong> macro (#{e})</div>"
-          end || all
+        if WikiExternalFilterHelper.has_macro(macro)
+          args = $5
         else
-          all
+          args = ($5 || '').split(',').each(&:strip)
         end
+        macro_subst[subst_key += 1] =
+          if esc.nil?
+            begin
+              @macros_runner.call(macro, args)
+            rescue => e
+              "<div class=\"flash error\">Error executing the <strong>#{macro}</strong> macro (#{e})</div>"
+            end || all
+          else
+            all
+          end
+	SUBST_PREFIX + subst_key.to_s
       end
+
+      text.gsub!(TICKET_RE) do
+        macro_subst[subst_key += 1] = $1
+        SUBST_PREFIX + subst_key.to_s + $2
+      end
+
+      text = BlueFeather.parse(text) || ''
+
+      text.gsub!(/#{SUBST_PREFIX}(\d+)/) do
+        macro_subst[$1.to_i]
+      end
+
       text
     end
 
-    PreCodeClassBlockRegexp = %r{^<pre><code\s+class="(\w+)">\s*\n(.+?)</code></pre>}m
-
     def syntax_highlight(str)
-      str.gsub(PreCodeClassBlockRegexp) {|block|
+      str.gsub(CODE_RE) do
         syntax = $1.downcase
-        "<pre><code class=\"#{syntax.downcase} CodeRay\">" +
-        CodeRay.scan($2, syntax).html(:escape => true, :line_numbers => nil) +
+        "<pre><code class=\"#{$1} CodeRay\">" +
+        CodeRay.scan($2, $1.downcase).html(:escape => false, :line_numbers => :inline) +
         "</code></pre>"
-      }
+      end
     end
   end
 end
