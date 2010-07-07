@@ -1,179 +1,822 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="Content-Style-Type" content="text/css" />
-    <title>Wiki formatting</title>
-    <style type="text/css">
-      h1 { font-family: Verdana, sans-serif; font-size: 14px; text-align: center; color: #444; }
-      body { font-family: Verdana, sans-serif; font-size: 12px; color: #444; }
-      table th { padding-top: 1em; }
-      table td { vertical-align: top; background-color: #f5f5f5; height: 2em; vertical-align: middle;}
-      table td code { font-size: 1.2em; }
-      table td h1 { font-size: 1.8em; text-align: left; }
-      table td h2 { font-size: 1.4em; text-align: left; }
-      table td h3 { font-size: 1.2em; text-align: left; }
-      img.tool { border: 1px solid #bbb; }
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <TITLE>Markdown Syntax Reference</TITLE>
+    <STYLE type="text/css">
+        .hi
+        {
+            background-color: #ccc;
+        }
+        .spaces
+        {
+            background-color: #FFFFCC;
+        }
+        body
+        {
+            margin: 10px;
+            margin-top: 10px;
+            text-align: left;
+            width: 600px;
+            background: #fff;
+            color: #000;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        h2
+        {
+            font-family: Trebuchet MS, Helvetica, sans-serif;
+            font-size: 140%;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+        p
+        {
+            margin-bottom: 8px;
+            line-height: 140%;
+        }
+        pre
+        {
+            font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New;
+            margin-bottom: 10px;
+            overflow: auto;
+            width: 620px;
+            padding: 5px;
+            background-color: #F5F5F5;
+            padding-bottom: 20px !ie7;
+            max-height: 600px;
+        }
+	pre.list
+	{
+	    width: 580px;
+	}
+        code
+        {
+            font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New;
+        }
+    </STYLE>
+    </HEAD><BODY>
 
-    </style>
-  </head>
-  <body>
+    <H1>Markdown Syntax Reference</H1>
 
-    <h1>Wiki Syntax Quick Reference</h1>
+    <ul>
+      <li>
+        <a href="#text-formatting">Text Formatting</a>
+	<ul>
+	  <li><a href="#italics-and-bold">Italics and Bold</a></li>
+	  <li><a href="#linebreaks">Linebreaks</a></li>
+	  <li><a href="#code-spans">Code Spans</a></li>
+	  <li><a href="#code-and-preformatted-text">Code and Preformatted Text</a></li>
+	  <li><a href="#fenced-code-blocks">Fenced Code Blocks</a></li>
+	  <li><a href="#inline-html">Inline HTML</a></li>
+	  <li><a href="#code-highlighting">Code Highlighting</a></li>
+	</ul>
+      </li>
+      <li>
+        <a href="#linking">Linking</a>
+	<ul>
+	  <li><a href="#basic-links">Basic Links</a></li>
+	  <li><a href="#advanced-links">Advanced Links</a></li>
+	  <li><a href="#redmine-links">Redmine Links</a></li>
+	  <li><a href="#images">Images</a></li>
+	  <li><a href="#footnotes">Footnotes</a></li>
+	</ul>
+      </li>
+      <li>
+        <a href="#structuring">Structuring</a>
+	<ul>
+	  <li><a href="#headers">Headers</a></li>
+	  <li><a href="#horizontal-rules">Horizontal Rules</a></li>
+	  <li><a href="#simple-lists">Simple Lists</a></li>
+	  <li><a href="#advanced-lists">Advanced Lists: Nesting</a></li>
+	  <li><a href="#simple-blockquotes">Simple Blockquotes</a></li>
+	  <li><a href="#advanced-blockquotes">Advanced Blockquotes: Nesting</a></li>
+	  <li><a href="#tables">Tables</a></li>
+	  <li><a href="#definition-lists">Definition Lists</a></li>
+	</ul>
+      </li>
+      <li>
+        <a href="#macros">Macros</a>
+      </li>
+      <li>
+        <a href="#references">References</a>
+      </li>
+    </ul>
 
-    <table width="100%">
-      <tr><th colspan="3">Font Styles</th></tr>
-      <tr>
-        <th>
-          <img src="../../../images/jstoolbar/bt_strong.png"
-               class="tool"
-               alt="Strong" />
-        </th>
-        <td width="50%">**Strong**</td>
-        <td width="50%"><strong>Strong</strong></td>
-      </tr>
-      <tr>
-        <th><img src="../../../images/jstoolbar/bt_em.png"
-                 class="tool"
-                 alt="Emphasis" /></th>
-        <td>*Emphasis*</td>
-        <td><em>Emphasis</em></td>
-      </tr>
-      <tr>
-        <th><img src="../../../images/jstoolbar/bt_ins.png"
-                 class="tool"
-                 alt="Underline" /></th>
-        <td>&lt;ins&gt;Underline&lt;/ins&gt></td>
-        <td><ins>Underline</ins></td>
-      </tr>
-      <tr>
-        <th><img src="../../../images/jstoolbar/bt_del.png"
-                 class="tool" alt="Deleted" /></th>
-        <td>&lt;del&gt;Deleted&lt;/del&gt;</td>
-        <td><del>Deleted</del></td>
-      </tr>
-      <tr>
-        <th></th>
-        <td>&lt;/cite&gt;Quote&lt;/cite&gt;</td>
-        <td><cite>Quote</cite></td>
-      </tr>
-      <tr>
-        <th><img src="../../../images/jstoolbar/bt_code.png"
-                 class="tool" alt="Inline Code" /></th>
-        <td>`Inline Code`</td>
-        <td><code>Inline Code</code></td>
-      </tr>
-      <tr>
-        <th><img src="../../../images/jstoolbar/bt_pre.png"
-                 class="tool" alt="Preformatted text" /></th>
-        <td>&lt;pre&gt;<br />&nbsp;lines<br />&nbsp;of code<br />&lt;/pre&gt;</td>
-        <td>
-<pre>
- lines
- of code
-</pre>
-        </td>
-      </tr>
+    <H2 id="text-formatting">Text Formatting</H2>
 
-      <tr><th colspan="3">Lists</th></tr>
-      <tr>
-        <th> <img src="../../../images/jstoolbar/bt_ul.png"
-                 class="tool" alt="Unordered list" /></th>
-        <td>* Item 1<br />* Item 2</td>
-        <td><ul><li>Item 1</li><li>Item 2</li></ul></td>
-      </tr>
-      <tr>
-        <th><img src="../../../images/jstoolbar/bt_ol.png"
-                 class="tool" alt="Ordered list" /></th>
-        <td>1. Item 1<br />1. Item 2</td>
-        <td><ol><li>Item 1</li><li>Item 2</li></ol></td>
-      </tr>
+    <H2 id="italics-and-bold">
+        Italics and Bold</H2>
+    <PRE><SPAN class="hi">*</SPAN>This is italicized<SPAN class="hi">*</SPAN>, and so is <SPAN class="hi">_</SPAN>this<SPAN class="hi">_</SPAN>.
+<SPAN class="hi">**</SPAN>This is bold<SPAN class="hi">**</SPAN>, and so is <SPAN class="hi">__</SPAN>this<SPAN class="hi">__</SPAN>.
+Use <SPAN class="hi">***</SPAN>italics and bold together<SPAN class="hi">***</SPAN> if you <SPAN class="hi">___</SPAN>have to<SPAN class="hi">___</SPAN>.
+</PRE>
+<p>Underscore emphasis only works for whole words. If you need to emphase only some part of a word, it is still possibile by using asterisks as emphasis markers.</p> 
+ 
+<p>For example, with this:</p> 
+ 
+<pre><code>Please open the folder "secret_magic_box".
+</code></pre> 
+ 
+<p>Markdown Extra won’t convert underscores to emphasis because they are in the middle of the word. The HTML result from Markdown Extra looks like this:</p> 
+ 
+<pre><code>&lt;p&gt;Please open the folder "secret_magic_box".&lt;/p&gt;
+</code></pre> 
+ 
+<p>Emphasis with underscore still works as long as you emphase whole words like this:</p> 
+ 
+<pre><code>I like it when you say _you love me_.
+</code></pre> 
+ 
+<p>The same apply for strong emphasis: with Markdown Extra, you can no longer set strong emphasis in the middle of a word using underscores, you must do so using asterisks as emphasis markers.</p>
 
-      <tr><th colspan="3">Headings</th></tr>
-      <tr>
-        <th><img src="../../../images/jstoolbar/bt_h1.png"
-                 class="tool" alt="Heading 1" /></th>
-        <td>Title 1<br />=======</td>
-        <td><h1>Title 1</h1></td>
-      </tr>
-      <tr>
-        <th><img src="../../../images/jstoolbar/bt_h2.png"
-                 class="tool" alt="Heading 2" /></th>
-        <td>Title 2<br />------</td>
-        <td><h2>Title 2</h2></td>
-      </tr>
-      <tr>
-        <th><img src="../../../images/jstoolbar/bt_h3.png"
-                 class="tool" alt="Heading 3" /></th>
-        <td>### Title 3</td>
-        <td><h3>Title 3</h3></td>
-      </tr>
+    <H2 id="linebreaks">
+        Linebreaks</H2>
+    <P>
+        End a line with two spaces to add a <CODE>&lt;br/&gt;</CODE> linebreak:</P>
+    <PRE>How do I love thee?<SPAN class="spaces">&nbsp;&nbsp;</SPAN>  
+Let me count the ways
+</PRE>
 
-      <tr><th colspan="3">External Links</th></tr>
-      <tr>
-        <th></th>
-        <td>[foobar](http://foo.bar)
-          <hr />
-          [foobar][1]<br />
-          . . .<br />
-          [1]: http://foo.bar
-          <hr />
-          [foobar][foobar]<br />
-          . . .<br />
-          [foobar]: http://foo.bar
-          <hr />
-          [foobar][]<br />
-          . . .<br />
-          [foobar]: http://foo.bar
-        </td>
-        <td><a href="http://foo.bar">foobar</a></td>
-      </tr>
+    <H2 id="code-spans">
+        Code Spans</H2>
+    <P>
+        Use backticks to create an inline <CODE>&lt;code&gt;</CODE> span:</P>
+    <PRE>Press the <SPAN class="hi">`</SPAN>&lt;Tab&gt;<SPAN class="hi">`</SPAN> key, then type a <SPAN class="hi">`</SPAN>$<SPAN class="hi">`</SPAN>.
+</PRE>
+    <P>
+        (The backtick key is in the upper left corner of most keyboards.)</P>
+    <P>
+        Like code blocks, code spans will be displayed in a monospaced typeface. Markdown
+        and HTML will not work within them. Note that, <I>unlike</I> code blocks, code spans
+        require you to manually escape any HTML within!</P>
+ 
+    <H2 id="code-and-preformatted-text">
+        Code and Preformatted Text</H2>
+    <P>
+        Indent four spaces to create an escaped <CODE>&lt;pre&gt;</CODE><CODE>&lt;code&gt;</CODE>
+        block:</P>
+    <PRE><SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>printf("goodbye world!");  /* his suicide note
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>                              was in C */
+</PRE>
+    <P>
+        The text will be wrapped in tags, and displayed in a monospaced typeface. The first
+        four spaces will be stripped off, but all other whitespace will be preserved.</P>
+    <P>
+        Markdown and HTML is ignored within a code block:</P>
+    <PRE><SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>&lt;blink&gt;
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>   You would hate this if it weren't
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>   wrapped in a code block.
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>&lt;/blink&gt;
+</PRE>
 
-      <tr> <th colspan="3">Redmine links</th></tr>
-      <tr>
-        <th><img src="../../../images/jstoolbar/bt_link.png"
-                 class="tool" alt="Link
-          to a Wiki page" /></th>
-        <td>[[Wiki page]]</td>
-        <td><a href="#">Wiki page</a></td>
-      </tr>
-      <tr>
-        <th></th>
-        <td>Issue #12</td>
-        <td>Issue <a href="#">#12</a></td>
-      </tr>
-      <tr>
-        <th></th>
-        <td>Revision r43</td>
-        <td>Revision <a href="#">r43</a></td>
-      </tr>
-      <tr><th></th>
-        <td>commit:f30e13e43</td>
-        <td><a href="#">f30e13e4</a></td>
-      </tr>
-      <tr><th></th>
-        <td>source:some/file</td>
-        <td><a href="#">source:some/file</a></td>
-      </tr>
+<h2 id="fenced-code-blocks">Fenced Code Blocks</h2> 
+ 
+<p>Fenced code blocks are like Markdown’s regular code blocks, except that they’re not indented and instead rely on a start and end fence lines to delimit the code block. The code block start with a line containing three or more tilde <code>~</code> characters, and ends with the first line with the same number of tilde <code>~</code>. For instance:</p> 
+ 
+<pre><code>This is a paragraph introducing:
+ 
+~~~~~~~~~~~~~~~~~~~~~
+a one-line code block
+~~~~~~~~~~~~~~~~~~~~~
+</code></pre> 
+ 
+<p>Contrary to their indented counterparts, fenced code blocks can begin and end with blank lines:</p> 
+ 
+<pre><code>~~~
+ 
+blank line before
+blank line after
+ 
+~~~
+</code></pre> 
+ 
+<p>Indented code blocks cannot be used immediately following a list because the list indent takes precedence; fenced code block have no such limitation:</p> 
+ 
+<pre><code>1.  List item
+<span class="spaces">&nbsp;</span>
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>Not an indented code block, but a second paragraph
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>in the list item
+<span class="spaces">&nbsp;</span> 
+~~~~
+This is a code block, fenced-style
+~~~~
+</code></pre> 
+ 
+<p>Fenced code blocks are also ideal if you need to paste some code in an editor which doesn’t have a command for increasing the indent of a block of text, such as a text box in your web browser.</p> 
 
-      <tr><th colspan="3">Inline images</th></tr>
-      <tr>
-        <th><img src="../../../images/jstoolbar/bt_img.png"
-                 class="tool" alt="Image"
-          /></th>
-        <td>![<kbd>alt text</kbd>](<kbd>image_url</kbd>)</td>
-        <td></td>
-      </tr>
-    </table>
+    <H2 id="inline-html">
+        Inline HTML</H2>
+    <P>
+        If you need to do something that Markdown can't handle, use HTML.</P>
+    <PRE> Strikethrough humor is <SPAN class="hi">&lt;strike&gt;</SPAN>funny<SPAN class="hi">&lt;/strike&gt;</SPAN>.
+</PRE>
+    <P>
+        Markdown is smart enough not to mangle your span-level HTML:</P>
+    <PRE><SPAN class="hi">&lt;u&gt;</SPAN>Markdown works <SPAN class="hi">*</SPAN>fine<SPAN class="hi">*</SPAN> in here.<SPAN class="hi">&lt;/u&gt;</SPAN>
+</PRE>
+    <P>
+        Note that in current version of BlueFeather block-level HTML elments may not be indented.</P>
+ 
+	<h2 id="code-highlighting">Code Highlighting</h2>
 
-    <p>See John Gruber's
-      <a href="http://daringfireball.net/projects/markdown/basics" 
-         onclick="window.open('http://daringfireball.net/projects/markdown/basics', '', ''); return false;">Markdown</a>
-       and
-      <a href="http://daringfireball.net/projects/smartypants/" 
-      onclick="window.open('http://daringfireball.net/projects/smartypants/', '', ''); return false;">SmartyPants</a>
-      postings for more details.
-    </p>
+	<p>Code highlightment relies on <a href="http://coderay.rubychan.de/" class="external">CodeRay</a>. It currently supports c, html, javascript, rhtml, ruby, scheme, xml languages.</p>
 
-  </body>
-</html>
+
+	<p>You can highlight code in your wiki page using this syntax:</p>
+
+
+<pre><code>&lt;pre&gt;&lt;code class="ruby"&gt;
+  Place you code here.
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+
+<h2 id="linking">Linking</h2>
+
+    <H2 id="basic-links">
+        Basic Links</H2>
+    <P>
+        There are three ways to write links. Each is easier to read than the last:</P>
+    <PRE>Here's an inline link to <SPAN class="hi">[Google](http://www.google.com/)</SPAN>.
+Here's a reference-style link to <SPAN class="hi">[Google][1]</SPAN>.
+Here's a very readable link to <SPAN class="hi">[Yahoo!][yahoo]</SPAN>.
+
+  <SPAN class="hi">[1]:</SPAN> http://www.google.com/
+  <SPAN class="hi">[yahoo]:</SPAN> http://www.yahoo.com/
+</PRE>
+    <P>
+        The link definitions can appear anywhere in the document -- before or after the
+        place where you use them. The link definition names <CODE>[1]</CODE> and <CODE>[yahoo]</CODE>
+        can be any unique string, and are case-insensitive; <CODE>[yahoo]</CODE> is the
+        same as <CODE>[YAHOO]</CODE>.</P>
+    <H2 id="advanced-links">
+        Advanced Links</H2>
+    <P>
+        Links can have a title attribute, which will show up on hover. Title attributes
+        can also be added; they are helpful if the link itself is not descriptive enough
+        to tell users where they're going.</P>
+    <PRE>Here's a <SPAN class="hi">[poorly-named link](http://www.google.com/ "Google")</SPAN>.
+Never write "<SPAN class="hi">[click here][^2]</SPAN>".
+Visit <SPAN class="hi">[us][web]</SPAN>.
+
+  <SPAN class="hi">[^2]:</SPAN> http://www.w3.org/QA/Tips/noClickHere
+        (Advice against the phrase "click here")
+  <SPAN class="hi">[web]:</SPAN> http://stackoverflow.com/ "Stack Overflow"
+</PRE>
+    <P>
+        You can also use standard HTML hyperlink syntax.</P>
+    <PRE>&lt;a href="http://example.com" title="example"&gt;example&lt;/a&gt;
+</PRE>
+	<h2 id="redmine-links">Redmine Links</h2>
+
+
+	<p>Redmine allows hyperlinking between issues, changesets and wiki pages from anywhere wiki formatting is used.</p>
+
+
+	<ul>
+	<li>Link to an issue: <strong>#124</strong> (displays <del><a href="/issues/124" class="issue closed" title="bulk edit doesn't change the category or fixed version properties (Closed)">#124</a></del>, link is striked-through if the issue is closed)</li>
+		<li>Link to a changeset: <strong>r758</strong> (displays <a href="/projects/redmine/repository/revisions/758" class="changeset" title="Search engine now only searches objects the user is allowed to view.">r758</a>)</li>
+		<li>Link to a changeset with a non-numeric hash: <strong>commit:c6f4d0fd</strong> (displays c6f4d0fd).  Added in <a href="/projects/redmine/repository/revisions/1236" class="changeset" title="Merged Git support branch (r1200 to r1226).">r1236</a>.</li>
+	</ul>
+
+
+	<p>Wiki links:</p>
+
+
+	<ul>
+	<li><strong>&#91;&#91;Guide&#93;&#93;</strong> displays a link to the page named 'Guide': <a href="Guide.html" class="wiki-page">Guide</a></li>
+		<li><strong>&#91;&#91;Guide|User manual&#93;&#93;</strong> displays a link to the same page but with a different text: <a href="Guide.html" class="wiki-page">User manual</a></li>
+		<li><strong>&#91;&#91;Guide#User-guide|User guide&#93;&#93;</strong> displays a link to the header on the same page with a different text: <a href="Guide.html" class="wiki-page">User guide</a></li>
+	</ul>
+
+
+	<p>You can also link to pages of an other project wiki:</p>
+
+
+	<ul>
+	<li><strong>&#91;&#91;sandbox:some page&#93;&#93;</strong> displays a link to the page named 'Some page' of the Sandbox wiki</li>
+		<li><strong>&#91;&#91;sandbox:&#93;&#93;</strong> displays a link to the Sandbox wiki main page</li>
+	</ul>
+
+	<p>Links to others resources:</p>
+
+	<ul>
+	<li>Documents:
+
+	<ul>
+	<li><strong>document#17</strong> (link to document with id 17)</li>
+		<li><strong>document:Greetings</strong> (link to the document with title "Greetings")</li>
+		<li><strong>document:"Some document"</strong> (double quotes can be used when document title contains spaces)</li>
+	</ul></li>
+	</ul>
+
+
+	<ul>
+	<li>Versions:
+
+	<ul>
+	<li><strong>version#3</strong> (link to version with id 3)</li>
+		<li><strong>version:1.0.0</strong> (link to version named "1.0.0")</li>
+		<li><strong>version:"1.0 beta 2"</strong></li>
+	</ul></li>
+	</ul>
+
+
+	<ul>
+	<li>Attachments:
+
+	<ul>
+	<li><strong>attachment:file.zip</strong> (link to the attachment of the current object named file.zip)</li>
+		<li>For now, attachments of the current object can be referenced only (if you're on an issue, it's possible to reference attachments of this issue only)</li>
+	</ul></li>
+	</ul>
+
+
+	<ul>
+	<li>Repository files
+
+	<ul>
+	<li><strong>source:some/file</strong>          -- Link to the file located at /some/file in the project's repository</li>
+		<li><strong>source:some/file@52</strong>       -- Link to the file's revision 52</li>
+		<li><strong>source:some/file#L120</strong>     -- Link to line 120 of the file</li>
+		<li><strong>source:some/file@52#L120</strong>  -- Link to line 120 of the file's revision 52</li>
+		<li><strong>export:some/file</strong>          -- Force the download of the file</li>
+	</ul></li>
+	</ul>
+
+
+	<p>Escaping:</p>
+
+
+	<ul>
+	<li>You can prevent Redmine links from being parsed by preceding them with an exclamation mark: !</li>
+    </ul>
+    <H2 id="images">
+        Images</H2>
+    <P>
+        Images are exactly like links, but they have an exclamation point in front of them:</P>
+    <PRE>![Valid XHTML](http://w3.org/Icons/valid-xhtml10).
+</PRE>
+    <P>
+        The word in square brackets is the alt text, which gets displayed if the browser
+        can't show the image. Be sure to include meaningful alt text for screen-reading
+        software.</P>
+    <P>
+        Just like links, images work with reference syntax and titles:</P>
+    <PRE>This page is <SPAN class="hi">![valid XHTML][checkmark]</SPAN>.
+ 
+<SPAN class="hi">[checkmark]:</SPAN> http://w3.org/Icons/valid-xhtml10
+             "What are you smiling at?"
+</PRE>
+    <P>
+        Note: Markdown does not currently support the shortest reference syntax for images:</P>
+    <PRE>Here's a broken ![checkmark].
+</PRE>
+    <P>
+        But you can use a slightly more verbose version of implicit reference names:</P>
+    <PRE>This <SPAN class="hi">![checkmark][]</SPAN> works.
+</PRE>
+    <P>
+        The reference name is also used as the alt text.</P>
+    <P>
+        You can also use standard HTML image syntax, which allows you to scale the
+        width and height of the image.</P>
+    <PRE>&lt;img src="http://example.com/sample.png" width="100" height="100"&gt;
+</PRE>
+    <P>
+        All URLs must be fully qualified path names. We do not support relative paths.</P>
+
+<h2 id="footnotes">Footnotes</h2> 
+ 
+<p>Footnotes work mostly like reference-style links. A footnote is made of two things: a marker in the text that will become a superscript number; a footnote definition  that will be placed in a list of footnotes at the end of the document. A footnote looks like this:</p> 
+ 
+<pre><code>That's some text with a footnote.[^1]
+ 
+[^1]: And that's the footnote.
+</code></pre> 
+ 
+<p>Footnote definitions can be found anywhere in the document, but footnotes will always be listed in the order they are linked to in the text. Note that you cannot make two links to the same footnotes: if you try, the second footnote reference will be left as plain text.</p> 
+ 
+<p>Each footnote must have a distinct name. That name will be used to link footnote references to footnote definitions, but has no effect on the numbering of the footnotes. Names can contain any character valid within an <code>id</code> attribute in HTML.</p> 
+ 
+<p>Footnotes can contain block-level elements, which means that you can put multiple paragraphs, lists, blockquotes and so on in a footnote. It works the same as for list items: just indent the following paragraphs by four spaces in the footnote definition:</p> 
+ 
+<pre><code>That's some text with a footnote.[^1]
+ 
+[^1]: And that's the footnote.
+ 
+    That's the second paragraph.
+</code></pre> 
+ 
+<p>If you want things to align better, you can leave the first line of the footnote empty and put your first paragraph just below:</p> 
+ 
+<pre><code>[^1]:
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>And that's the footnote.
+<SPAN class="spaces">&nbsp;</SPAN>
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>That's the second paragraph.
+</code></pre> 
+ 
+<h3 id="fn-output">Output</h3> 
+ 
+<p>It’s probably true that a single footnote markup cannot satisfy everyone. A future version may provide a programming interface to allow different markup to be generated. But for today, the output follows <a href="http://daringfireball.net/2005/07/footnotes">what can be seen on Daring Fireball</a>, with slight modifications. Here is the default output from the first sample above:</p> 
+ 
+<pre><code>&lt;p&gt;That's some text with a footnote.
+   &lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+ 
+&lt;div class="footnotes"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+ 
+&lt;li id="fn:1"&gt;
+&lt;p&gt;And that's the footnote.
+   &lt;a href="#fnref:1" rev="footnote"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+ 
+&lt;/ol&gt;
+&lt;/div&gt;
+</code></pre> 
+ 
+<p>A little cryptic, but in a browser it will look like this:</p> 
+ 
+<div class="html"> 
+    <p>That’s some text with a footnote.<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p> 
+ 
+    <div class="footnotes"> 
+    <hr /> 
+    <ol> 
+ 
+    <li id="fn:1"> 
+    <p>And that’s the footnote.
+       <a href="#fnref:1" rev="footnote">↩</a></p> 
+    </li> 
+ 
+    </ol> 
+    </div> 
+</div> 
+ 
+<p>The <code>rel</code> and <code>rev</code> attributes on the links express the relation they have with the elements they link to. Reference links lead to footnotes (hence <code>rel="footnote"</code>) and backlinks comes from footnotes (hence <code>rev="footnote"</code>). They can be used to style the elements with CSS rules such as:</p> 
+ 
+<pre><code>a[rel="footnote"]
+a[rev="footnote"]
+</code></pre> 
+ 
+<p>You can also customize the <code>class</code> and <code>title</code> attributes for footnote links and backlinks. There are four configurable settings to that effect at the start of the file. Within these attributes, any occurrence of <code>%%</code> will be replaced by the current footnote number. For instance, you could use:</p> 
+ 
+<pre><code>define( 'MARKDOWN_FN_LINK_TITLE', "Go to footnote %%." );
+</code></pre> 
+
+    <h2 id="structuring">Structuring</h2>
+
+    <H2 id="headers">
+        Headers</H2>
+    <P>
+        Underline text to make the two <CODE>&lt;h1&gt;</CODE> <CODE>&lt;h2&gt;</CODE> top-level
+        headers :</P>
+    <PRE>Header 1
+<SPAN class="hi">========</SPAN>
+
+Header 2
+<SPAN class="hi">--------</SPAN>
+</PRE>
+    <P>
+        The number of = or - signs doesn't matter; one will work. But using enough to underline
+        the text makes your titles look better in plain text.</P>
+    <P>
+        Use hash marks for several levels of headers:</P>
+    <PRE><SPAN class="hi">#</SPAN> Header 1 <SPAN class="hi">#</SPAN>
+<SPAN class="hi">##</SPAN> Header 2 <SPAN class="hi">##</SPAN>
+<SPAN class="hi">###</SPAN> Header 3 <SPAN class="hi">###</SPAN>
+</PRE>
+    <P>
+        The closing # characters are optional.</P>
+<p>With Markdown Extra, you can set id attribute to headers. You should add the id prefixed by a hash inside curly brackets after the header at the end of the line, like this:</p> 
+ 
+<pre><code>Header 1            {#header1}
+========
+ 
+## Header 2 ##      {#header2}
+</code></pre> 
+ 
+<p>Then you can create links to different parts of the same document like this:</p> 
+ 
+<pre><code>[Link back to header 1](#header1)
+</code></pre> 
+ 
+<p>Setting the id attribute will work only with headers for now.</p>
+
+    <H2 id="horizontal-rules">
+        Horizontal Rules</H2>
+    <P>
+        Insert a horizontal rule <CODE>&lt;hr/&gt;</CODE> by putting three or more hyphens,
+        asterisks, or underscores on a line by themselves:</P>
+    <PRE>Rule #1
+<SPAN class="hi">---</SPAN>
+Rule #2
+<SPAN class="hi">*******</SPAN>
+Rule #3
+<SPAN class="hi">___</SPAN>
+</PRE>
+    <P>
+        Using spaces between the characters also works:</P>
+    <PRE>Rule #4    
+<SPAN class="hi">- - - -</SPAN>
+</PRE>
+    <H2 id="simple-lists">
+        Simple Lists</H2>
+    <P>
+        A bulleted <CODE>&lt;ul&gt;</CODE> list:</P>
+    <PRE><SPAN class="hi">-</SPAN><SPAN class="spaces">&nbsp;</SPAN>Use a minus sign for a bullet
+<SPAN class="hi">+</SPAN><SPAN class="spaces">&nbsp;</SPAN>Or plus sign
+<SPAN class="hi">*</SPAN><SPAN class="spaces">&nbsp;</SPAN>Or an asterisk
+</PRE>
+    <P>
+        A numbered <CODE>&lt;ol&gt;</CODE> list:</P>
+    <PRE><SPAN class="hi">1.</SPAN><SPAN class="spaces">&nbsp;</SPAN>Numbered lists are easy
+<SPAN class="hi">2.</SPAN><SPAN class="spaces">&nbsp;</SPAN>Markdown keeps track of the numbers for you
+<SPAN class="hi">7.</SPAN><SPAN class="spaces">&nbsp;</SPAN>So this will be item 3.
+</PRE>
+    <P>
+        A double-spaced list:</P>
+    <PRE><SPAN class="hi">-</SPAN><SPAN class="spaces">&nbsp;</SPAN>This list gets wrapped in &lt;p&gt; tags
+<SPAN class="spaces">&nbsp;</SPAN>
+<SPAN class="hi">-</SPAN><SPAN class="spaces">&nbsp;</SPAN>So there will be extra space between items
+</PRE>
+    <H2 id="advanced-lists">
+        Advanced Lists: Nesting</H2>
+    <P>
+        To put other Markdown blocks in a list; just indent four spaces for each nesting
+        level:</P>
+    <PRE><SPAN class="hi">1.</SPAN><SPAN class="spaces">&nbsp;</SPAN>Lists in a list item:
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN class="hi">-</SPAN><SPAN class="spaces">&nbsp;</SPAN>Indented four spaces.
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN class="hi">*</SPAN><SPAN class="spaces">&nbsp;</SPAN>indented eight spaces.
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN class="hi">-</SPAN><SPAN class="spaces">&nbsp;</SPAN>Four spaces again.
+<SPAN class="hi">2.</SPAN><SPAN class="spaces">&nbsp;&nbsp;</SPAN>Multiple paragraphs in a list items:
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>It's best to indent the paragraphs four spaces
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>You can get away with three, but it can get
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>confusing when you nest other things.
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>Stick to four.
+<SPAN class="spaces">&nbsp;</SPAN>
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>We indented the first line an extra space to align
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>it with these paragraphs.  In real use, we might do
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>that to the entire list so that all items line up.
+<SPAN class="spaces">&nbsp;</SPAN>
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>This paragraph is still part of the list item, but it looks messy to humans.  So it's a good idea to wrap your nested paragraphs manually, as we did with the first two.
+<SPAN class="spaces">&nbsp;</SPAN>
+<SPAN class="hi">3.</SPAN><SPAN class="spaces">&nbsp;</SPAN>Blockquotes in a list item:
+<SPAN class="spaces"> </SPAN>
+<SPAN class="spaces"></SPAN><SPAN class="hi">&gt;</SPAN> Skip a line and
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN class="hi">&gt;</SPAN> indent the &gt;'s four spaces.
+<SPAN class="spaces">&nbsp;</SPAN>
+<SPAN class="hi">4.</SPAN><SPAN class="spaces">&nbsp;</SPAN>Preformatted text in a list item:
+<SPAN class="spaces">&nbsp;</SPAN>
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>Skip a line and indent eight spaces.
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>That's four spaces for the list
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>and four to trigger the code block.
+</PRE>
+    <H2 id="simple-blockquotes">
+        Simple Blockquotes</H2>
+    <P>
+        Add a <CODE>&gt;</CODE> to the beginning of any line to create a <CODE>&lt;blockquote&gt;</CODE>.</P>
+    <PRE><SPAN class="hi">&gt;</SPAN> The syntax is based on the way email programs
+<SPAN class="hi">&gt;</SPAN> usually do quotations. You don't need to hard-wrap
+<SPAN class="hi">&gt;</SPAN> the paragraphs in your blockquotes, but it looks much nicer if you do.  Depends how lazy you feel.
+</PRE>
+    <H2 id="advanced-blockquotes">
+        Advanced Blockquotes: Nesting</H2>
+    <P>
+        To put other Markdown blocks in a <CODE>&lt;blockquote&gt;</CODE>, just add a <CODE>
+            &gt;</CODE> followed by a space:</P>
+    <PRE><SPAN class="hi">&gt;</SPAN> The &gt; on the blank lines is optional.
+<SPAN class="hi">&gt;</SPAN> Include it or don't; Markdown doesn't care.
+<SPAN class="hi">&gt;</SPAN><SPAN class="spaces">&nbsp;</SPAN>
+<SPAN class="hi">&gt;</SPAN> But your plain text looks better to
+<SPAN class="hi">&gt;</SPAN> humans if you include the extra `&gt;`
+<SPAN class="hi">&gt;</SPAN> between paragraphs.
+</PRE>
+    <P>
+        Blockquotes within a blockquote:</P>
+    <PRE><SPAN class="hi">&gt;</SPAN> A standard blockquote is indented
+<SPAN class="hi">&gt;</SPAN> <SPAN class="hi">&gt;</SPAN> A nested blockquote is indented more
+<SPAN class="hi">&gt;</SPAN> <SPAN class="hi">&gt;</SPAN> <SPAN class="hi">&gt;</SPAN> <SPAN class="hi">&gt;</SPAN> You can nest to any depth.
+</PRE>
+    <P>
+        Lists in a blockquote:</P>
+    <PRE><SPAN class="hi">&gt;</SPAN><SPAN class="spaces">&nbsp;</SPAN><SPAN class="hi">-</SPAN> A list in a blockquote
+<SPAN class="hi">&gt;</SPAN><SPAN class="spaces">&nbsp;</SPAN><SPAN class="hi">-</SPAN> With a &gt; and space in front of it
+<SPAN class="hi">&gt;</SPAN><SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN class="hi">*</SPAN> A sublist
+</PRE>
+    <P>
+        Preformatted text in a blockquote:</P>
+    <PRE><SPAN class="hi">&gt;</SPAN><SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>Indent five spaces total.  The first
+<SPAN class="hi">&gt;</SPAN><SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>one is part of the blockquote designator.
+</PRE>
+
+<h2 id="tables">Tables</h2> 
+ 
+<p>A “simple” table looks like this:</p> 
+ 
+<pre><code>First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+</code></pre> 
+ 
+<p>First line contains column headers; second line contains a mandatory separator line between the headers and the content; each following line is a row in the table. Columns are always separated by the pipe (<code>|</code>) character. Once converted to HTML, the result is like this:</p> 
+ 
+<pre><code>&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+  &lt;th&gt;First Header&lt;/th&gt;
+  &lt;th&gt;Second Header&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+  &lt;td&gt;Content Cell&lt;/td&gt;
+  &lt;td&gt;Content Cell&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;Content Cell&lt;/td&gt;
+  &lt;td&gt;Content Cell&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre> 
+ 
+<p>If you wish, you can add a leading and tailing pipe to each line of the table. Use the form that you like. As an illustration, this will give the same result as above:</p> 
+ 
+<pre><code>| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+</code></pre> 
+ 
+<p>Note: A table need <em>at least</em> one pipe on each line for Markdown Extra to parse it correctly. This means that the only way to create a one-column table is to add a leading or a tailing pipe, or both of them, to each line.</p> 
+ 
+<p>You can specify alignement for each column by adding colons to separator lines. A colon at the left of the separator line will make the column left-aligned; a colon on the right of the line will make the column right-aligned; colons at both side means the column is center-aligned.</p> 
+ 
+<pre><code>| Item      | Value |
+| --------- | -----:|
+| Computer  | $1600 |
+| Phone     |   $12 |
+| Pipe      |    $1 |
+</code></pre> 
+ 
+<p>The <code>align</code> HTML attribute is applied to each cell of the concerned column.</p> 
+ 
+<p>You can apply span-level formatting to the content of each cell using regular Markdown syntax:</p> 
+ 
+<pre><code>| Function name | Description                    |
+| ------------- | ------------------------------ |
+| `help()`      | Display the help window.       |
+| `destroy()`   | **Destroy your computer!**     |
+</code></pre> 
+ 
+<h2 id="definition-lists">Definition Lists</h2> 
+ 
+<p>Definition lists are made of terms and definitions of these terms, much like in a dictionary.</p> 
+ 
+<p>A simple definition list in Markdown Extra is made of a single-line term followed by a colon and the definition for that term.</p> 
+ 
+<pre><code>Apple
+:<SPAN class="spaces">&nbsp;&nbsp;&nbsp;</SPAN>Pomaceous fruit of plants of the genus Malus in 
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>the family Rosaceae.
+ 
+Orange
+:<SPAN class="spaces">&nbsp;&nbsp;&nbsp;</SPAN>The fruit of an evergreen tree of the genus Citrus.
+</code></pre> 
+ 
+<p>Terms must be separated from the previous definition by a blank line. Definitions can span on multiple lines, in which case they should be indented. But you don’t really have to: if you want to be lazy, you could forget to indent a definition that span on multiple lines and it will still work:</p> 
+ 
+<pre><code>Apple
+:<SPAN class="spaces">&nbsp;&nbsp;&nbsp;</SPAN>Pomaceous fruit of plants of the genus Malus in 
+the family Rosaceae.
+ 
+Orange
+:<SPAN class="spaces">&nbsp;&nbsp;&nbsp;</SPAN>The fruit of an evergreen tree of the genus Citrus.
+</code></pre> 
+ 
+<p>Each of the preceding definition lists will give the same HTML result:</p> 
+ 
+<pre><code>&lt;dl&gt;
+&lt;dt&gt;Apple&lt;/dt&gt;
+&lt;dd&gt;Pomaceous fruit of plants of the genus Malus in 
+the family Rosaceae.&lt;/dd&gt;
+ 
+&lt;dt&gt;Orange&lt;/dt&gt;
+&lt;dd&gt;The fruit of an evergreen tree of the genus Citrus.&lt;/dd&gt;
+&lt;/dl&gt;
+</code></pre> 
+ 
+<p>Colons as definition markers typically start at the left margin, but may be indented by up to three spaces. Definition markers must be followed by one or more spaces or a tab.</p> 
+ 
+<p>Definition lists can have more than one definition associated with one term:</p> 
+ 
+<pre><code>Apple
+:<SPAN class="spaces">&nbsp;&nbsp;&nbsp;</SPAN>Pomaceous fruit of plants of the genus Malus in 
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>the family Rosaceae.
+:<SPAN class="spaces">&nbsp;&nbsp;&nbsp;</SPAN>An american computer company.
+ 
+Orange
+:<SPAN class="spaces">&nbsp;&nbsp;&nbsp;</SPAN>The fruit of an evergreen tree of the genus Citrus.
+</code></pre> 
+ 
+<p>You can also associate more than one term to a definition:</p> 
+ 
+<pre><code>Term 1
+Term 2
+:<SPAN class="spaces">&nbsp;&nbsp;&nbsp;</SPAN>Definition a
+ 
+Term 3
+:<SPAN class="spaces">&nbsp;&nbsp;&nbsp;</SPAN>Definition b
+</code></pre> 
+ 
+<p>If a definition is preceded by a blank line, Markdown Extra will wrap the definition in <code>&lt;p&gt;</code> tags in the HTML output. For example, this:</p> 
+ 
+<pre><code>Apple
+ 
+:<SPAN class="spaces">&nbsp;&nbsp;&nbsp;</SPAN>Pomaceous fruit of plants of the genus Malus in 
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>the family Rosaceae.
+ 
+Orange
+ 
+:<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>The fruit of an evergreen tree of the genus Citrus.
+</code></pre> 
+ 
+<p>will turn into this:</p> 
+ 
+<pre><code>&lt;dl&gt;
+&lt;dt&gt;Apple&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;Pomaceous fruit of plants of the genus Malus in 
+the family Rosaceae.&lt;/p&gt;
+&lt;/dd&gt;
+ 
+&lt;dt&gt;Orange&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;The fruit of an evergreen tree of the genus Citrus.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+</code></pre> 
+ 
+<p>And just like regular list items, definitions can contain multiple paragraphs, and include other block-level elements such as blockquotes, code blocks, lists, and even other definition lists.</p> 
+ 
+<pre><code>Term 1
+ 
+:<SPAN class="spaces">&nbsp;&nbsp;&nbsp;</SPAN>This is a definition with two paragraphs. Lorem ipsum 
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>dolor sit amet, consectetuer adipiscing elit. Aliquam 
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>hendrerit mi posuere lectus.
+<SPAN class="spaces">&nbsp;</SPAN>
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>Vestibulum enim wisi, viverra nec, fringilla in, laoreet
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>vitae, risus.
+<SPAN class="spaces">&nbsp;</SPAN>
+:<SPAN class="spaces">&nbsp;&nbsp;&nbsp;</SPAN>Second definition for term 1, also wrapped in a paragraph
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>because of the blank line preceding it.
+<SPAN class="spaces">&nbsp;</SPAN>
+Term 2
+<SPAN class="spaces">&nbsp;</SPAN>
+:<SPAN class="spaces">&nbsp;&nbsp;&nbsp;</SPAN>This definition has a code block, a blockquote and a list.
+<SPAN class="spaces">&nbsp;</SPAN>
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>code block.
+<SPAN class="spaces">&nbsp;</SPAN>
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>&gt; block quote
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>&gt; on two lines.
+<SPAN class="spaces">&nbsp;</SPAN>
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>1.  first list item
+<SPAN class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>2.  second list item
+</code></pre> 
+ 
+	<h2 id="macros">Macros</h2>
+
+
+	<p>Redmine has the following builtin macros:</p>
+
+
+	<dl><dt><code>child_pages</code></dt><dd><p>Displays a list of child pages. With no argument, it displays the child pages of the current wiki page. Examples:</p>
+
+
+    <pre class="list"><code>{{child_pages}} -- can be used from a wiki page only<br/>{{child_pages(Foo)}} -- lists all children of page Foo<br/>{{child_pages(Foo, parent=1)}} -- the same as above<br/>    with a link to page Foo</code></pre></dd><dt><code>hello_world</code></dt><dd><p>Sample macro.</p></dd><dt><code>include</code></dt><dd><p>Include a wiki page. Example:</p>
+
+
+	<pre class="list"><code>{{include(Foo)}}</code></pre>
+
+
+	<p>or to include a page of a specific project wiki:</p>
+
+
+    <pre class="list"><code>{{include(projectname:Foo)}}</code></pre></dd><dt><code>macro_list</code></dt><dd><p>Displays a list of all available macros, including description if available.</p></dd>
+
+    <dt><code>toc</code></dt><dd><p>Displays left-aligned table of content.</p></dd>
+
+    <dt><code>&gt;toc</code></dt><dd><p>Displays right-aligned table of content.</p></dd></dl>
+
+<hr />
+
+    <H2 id="references">
+        References</H2>
+    <ul>
+      <li><A href="http://stackoverflow.com/editing-help">StackOverflow Markdown description</A> - used as the basis for this document.</li>
+      <li><A href="http://daringfireball.net/projects/markdown/syntax">Official Markdown syntax reference page</A></li>
+      <li><A href="http://michelf.com/projects/php-markdown/extra/">PHP Markdown Extra syntax reference page</A></li>
+      <li><A href="http://ruby.morphball.net/bluefeather/doc/en/format-extension.html">BlueFeather Markdown format description</A> - some notes on differencies in Markdown format understood by BlueFeather Markdown parser used in Redmine.</li>
+    </ul>
+
+</BODY></HTML>
