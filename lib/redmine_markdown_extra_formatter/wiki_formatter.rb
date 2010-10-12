@@ -108,16 +108,6 @@ module RedmineMarkdownExtraFormatter
              "</pre>")
     end
 
-    MACROS_RE = /
-          (!)?                        # escaping
-          (
-          \{\{                        # opening tag
-          ([\w]+)                     # macro name
-          (\((.*?)\))?                # optional arguments
-          \}\}                        # closing tag
-          )
-        /xm
-
     TICKET_RE = /(#\d+)(\W|$)/
 
     CODE_RE = /
@@ -131,25 +121,6 @@ module RedmineMarkdownExtraFormatter
     def inline_macros(text)
       macro_subst = {}
       subst_key = 0
-      text.gsub!(MACROS_RE) do
-        esc, all, macro = $1, $2, $3.downcase
-        if WikiExternalFilterHelper.has_macro(macro)
-          args = $5
-        else
-          args = ($5 || '').split(',').each(&:strip)
-        end
-        macro_subst[subst_key += 1] =
-          if esc.nil?
-            begin
-              @macros_runner.call(macro, args)
-            rescue => e
-              "<div class=\"flash error\">Error executing the <strong>#{macro}</strong> macro (#{e})</div>"
-            end || all
-          else
-            all
-          end
-	SUBST_PREFIX + subst_key.to_s
-      end
 
       text.gsub!(TICKET_RE) do
         macro_subst[subst_key += 1] = $1
